@@ -1,0 +1,11 @@
+{
+  "presets": ["@babel/env", "@babel/typescript", "@babel/react"],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-transform-arrow-functions",
+    "@babel/plugin-proposal-numeric-separator",
+    "@babel/proposal-object-rest-spread",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+  ]
+}
