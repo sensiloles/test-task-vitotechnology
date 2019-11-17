@@ -49,6 +49,7 @@ module.exports = {
     'react/jsx-wrap-multilines': [
       'error',
       { declaration: false, assignment: false }
-    ]
+    ],
+    'no-console': [1, { allow: ['warn', 'error'] }]
   }
 };

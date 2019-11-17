@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import './index.scss';
 import Header from '../Header';
-import routes from '../../routes';
+import routes from '../../rout';
 import Footer from '../Footer';
 
 const useStyles = makeStyles(() => ({
@@ -13,7 +13,8 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'column'
   },
   content: {
-    flex: 1
+    flex: 1,
+    padding: '0 10px'
   }
 }));
 

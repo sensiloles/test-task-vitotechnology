@@ -21,7 +21,9 @@ export default function Footer(): JSX.Element {
 
   return (
     <footer className={classes.footer}>
-      <Typography>Footer</Typography>
+      <Typography variant="caption">
+        Designed by Alexey Filippov aleksey.filippov91@gmail.com
+      </Typography>
     </footer>
   );
 }

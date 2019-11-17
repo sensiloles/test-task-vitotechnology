@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ImageDownloader from '../components/ImageDownloader';
+import ImageDownloader from '../components/Images';
 import Repositories from '../components/Repositories';
 import NotFoundPage from '../components/NotFoundPage';
 
