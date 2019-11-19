@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardMedia } from '@material-ui/core';
-import placeholder from '../../../assets/images/image_placeholder.png';
+import placeholder from '../../../assets/images/image-placeholder.png';
 
 interface ImageProps {
   image: string;
@@ -10,7 +10,7 @@ interface ImageProps {
   alt: string;
 }
 
-export default function Image({
+export default function ImageItem({
   image,
   status,
   ...rest

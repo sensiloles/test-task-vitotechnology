@@ -1,25 +1,18 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Typography, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 import ImageForm from './ImageForm';
 import ImageList from './ImageList';
+import { ImageDataState, ImageDataActions } from '../../types/imageDownloader';
 
 const useStyles = makeStyles(() => ({
-  content: {}
+  imageDownloader: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%'
+  }
 }));
-
-interface ImageDataState {
-  [key: string]: {
-    status: string;
-  };
-}
-
-interface ImageDataAction {
-  type: string;
-  payload: string;
-}
-
-const initialState: ImageDataState = {};
 
 function splitState(state: ImageDataState, url: string): ImageDataState {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -30,7 +23,7 @@ function splitState(state: ImageDataState, url: string): ImageDataState {
 
 function imageDataReducer(
   state: ImageDataState,
-  action: ImageDataAction
+  action: ImageDataActions
 ): ImageDataState {
   const url = action.payload;
 
@@ -49,7 +42,7 @@ function imageDataReducer(
           status: 'isLoaded'
         }
       };
-    case 'RESPONSE_NOT_VALID':
+    case 'REQUEST_FAILED':
       return splitState(state, url);
     default: {
       return {
@@ -60,9 +53,14 @@ function imageDataReducer(
 }
 
 export default function ImageDownloader(): JSX.Element {
+  const classes = useStyles();
+
   const [query, setQuery] = useState('');
   const [queryError, setQueryError] = useState(false);
-  const [imageData, setImageData] = useReducer(imageDataReducer, initialState);
+  const [imageData, setImageData] = useReducer(
+    imageDataReducer,
+    {} as ImageDataState
+  );
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
@@ -82,34 +80,32 @@ export default function ImageDownloader(): JSX.Element {
           }
         }
       } catch (err) {
-        setImageData({ type: 'RESPONSE_NOT_VALID', payload: query });
+        setImageData({ type: 'REQUEST_FAILED', payload: query });
         setQueryError(true);
         console.error(`Fetch request image is failed. Error: ${err.message}`);
       }
     };
 
-    if (query) fetchData();
-    setQuery('');
+    if (query) {
+      fetchData();
+      setQuery('');
+    }
   }, [query]);
 
   const imageDataIsEmpty = !Object.keys(imageData).length;
 
   return (
-    <Grid container alignContent="center" justify="center">
-      <Grid item lg={4}>
-        <ImageForm
-          setQuery={setQuery}
-          queryError={queryError}
-          setQueryError={setQueryError}
-        />
-      </Grid>
+    <div className={classes.imageDownloader}>
+      <ImageForm
+        setQuery={setQuery}
+        queryError={queryError}
+        setQueryError={setQueryError}
+      />
       {imageDataIsEmpty ? (
-        <Grid item container justify="center">
-          <Typography>Not images</Typography>
-        </Grid>
+        <Typography color="textSecondary">Not images</Typography>
       ) : (
         <ImageList images={imageData} />
       )}
-    </Grid>
+    </div>
   );
 }

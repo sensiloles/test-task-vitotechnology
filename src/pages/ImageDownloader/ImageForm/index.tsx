@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { TextField, Button, makeStyles } from '@material-ui/core';
+import { TextField, Button, makeStyles, Theme } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import validateUrl from '../../../utils/validateUrl';
-import Message from '../../Message';
+import Message from '../../../components/AlertMessage';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   imageForm: {
     justifyContent: 'center',
     display: 'flex',
-    margin: '50px 0px'
+    margin: '50px 0px',
+    width: '50%',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
   },
   urlInput: {
     marginRight: '5px'
@@ -34,7 +38,10 @@ export default function ImageForm({
   function submitForm(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
 
-    if (!imageUrl) return;
+    if (!imageUrl) {
+      setFormError(true);
+      return;
+    }
 
     if (!validateUrl(imageUrl)) {
       setQueryError(true);
@@ -72,6 +79,7 @@ export default function ImageForm({
         value={imageUrl}
         onChange={onChangeImageUrlInput}
         fullWidth
+        placeholder="Enter image URL"
         variant="outlined"
         margin="none"
         required
@@ -87,7 +95,10 @@ export default function ImageForm({
       >
         Upload
       </Button>
-      <Message open={queryError} />
+      <Message
+        open={queryError}
+        message="This URL is invalid or image is not available"
+      />
     </form>
   );
 }

@@ -13,7 +13,8 @@ export default function Menu(): JSX.Element {
       event &&
       event.type === 'keydown' &&
       ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
+        (event as React.KeyboardEvent).key === 'Shift' ||
+        (event as React.KeyboardEvent).key === 'Enter')
     ) {
       return;
     }

@@ -26,13 +26,13 @@ export default function MenuList({ toggleDrawer }: MenuListProps): JSX.Element {
       icon: <HomeIcon />
     },
     images: {
-      title: 'Images',
+      title: 'Image downloader',
       path: '/images',
       icon: <PermMediaIcon />
     },
     repositories: {
-      title: 'Repositories',
-      path: '/repos',
+      title: 'GitHub users',
+      path: '/users',
       icon: <FileCopyIcon />
     }
   };
@@ -42,7 +42,6 @@ export default function MenuList({ toggleDrawer }: MenuListProps): JSX.Element {
       role="presentation"
       className={classes.menuList}
       onClick={toggleDrawer()}
-      // TODO: Fix action with press enter
       onKeyDown={toggleDrawer()}
     >
       <List>

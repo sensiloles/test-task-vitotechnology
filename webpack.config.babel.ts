@@ -3,6 +3,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import autoprefixer, { Autoprefixer } from 'autoprefixer';
+import Dotenv from 'dotenv-webpack';
 
 const isProduction =
   process.argv.indexOf('-p') >= 0 || process.env.NODE_ENV === 'production';
@@ -86,6 +87,7 @@ module.exports = {
       NODE_ENV: 'development',
       DEBUG: false
     }),
+    new Dotenv({ path: './.env.development.local' }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'assets/index.html',

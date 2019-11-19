@@ -1,27 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Menu from './Menu';
 
-export default function Header(): JSX.Element {
+type HeaderProps = RouteComponentProps;
+
+export default function Header(props: HeaderProps): JSX.Element {
   const [pageName, setPageName] = useState('');
+  const {
+    location: { pathname }
+  } = props;
 
   useEffect(() => {
-    const pathName = window.location.pathname;
-
-    switch (pathName) {
+    switch (pathname) {
       case '/':
         setPageName('Home');
         break;
       case '/images':
-        setPageName('Images');
+        setPageName('Image downloader');
         break;
-      case '/repos':
-        setPageName('Repositories');
+      case '/users':
+        setPageName('GitHub users');
         break;
       default:
         setPageName('');
     }
-  }, [pageName]);
+  }, [pageName, pathname]);
 
   return (
     <AppBar position="static" color="default">

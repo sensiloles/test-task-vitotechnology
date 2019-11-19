@@ -30,12 +30,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-interface MessageProps {
+interface AlertMessageProps {
   open: boolean;
+  message: string;
 }
 
-export default function Message({ open }: MessageProps): JSX.Element {
+export default function AlertMessage({
+  open,
+  message
+}: AlertMessageProps): JSX.Element {
   const classes = useStyles();
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
@@ -46,7 +51,7 @@ export default function Message({ open }: MessageProps): JSX.Element {
     <Snackbar
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'left'
+        horizontal: 'center'
       }}
       open={openSnackbar}
       autoHideDuration={6000}
@@ -59,7 +64,7 @@ export default function Message({ open }: MessageProps): JSX.Element {
         message={
           <span className={classes.message}>
             <WarningIcon className={classes.iconMessage} />
-            This URL is invalid or image is not available
+            {message}
           </span>
         }
         aria-describedby="client-snackbar"
