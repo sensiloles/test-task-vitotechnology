@@ -6,10 +6,8 @@ import UserList from './UserList';
 import RepositoryList from './RepositoryList';
 import {
   QueryState,
-  QueryActions,
   GitHubUsersState,
-  Repository,
-  UserDataActions
+  Repository
 } from '../../types/githubUsers';
 import {
   REQUEST_FETCHING,
@@ -17,6 +15,7 @@ import {
   REQUEST_FAILED,
   SET_USER_DATA
 } from '../../constants';
+import { queryReducer, userDataReducer } from '../../reducers';
 
 const useStyles = makeStyles(theme => ({
   gitHubUsers: {
@@ -67,51 +66,6 @@ const getRepositories = (user: string): string => `
     }
   }
 `;
-
-function queryReducer(state: QueryState, action: QueryActions): QueryState {
-  const userName = action.payload;
-  const error = action.payload;
-
-  switch (action.type) {
-    case REQUEST_FETCHING:
-      return {
-        ...state,
-        userName,
-        isFetching: true,
-        isLoaded: false,
-        error: ''
-      };
-    case REQUEST_SUCCESS:
-      return { ...state, isFetching: false, isLoaded: true, error: '' };
-    case REQUEST_FAILED:
-      return { ...state, isFetching: false, isLoaded: false, error };
-    default:
-      return { ...state };
-  }
-}
-
-function userDataReducer(
-  state: GitHubUsersState,
-  action: UserDataActions
-): GitHubUsersState {
-  if (action.type === SET_USER_DATA) {
-    const { userName, repositories } = action.payload;
-    const newUser = {
-      [userName]: {
-        repositories
-      }
-    };
-
-    return {
-      ...state,
-      ...newUser
-    };
-  }
-
-  return {
-    ...state
-  };
-}
 
 export default function GitHubUsers(): JSX.Element {
   const classes = useStyles();

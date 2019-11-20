@@ -3,7 +3,8 @@ import axios from 'axios';
 import { Typography, makeStyles } from '@material-ui/core';
 import ImageForm from './ImageForm';
 import ImageList from './ImageList';
-import { ImageDataState, ImageDataActions } from '../../types/imageDownloader';
+import { ImageDataState } from '../../types/imageDownloader';
+import { imageDataReducer } from '../../reducers';
 
 const useStyles = makeStyles(() => ({
   imageDownloader: {
@@ -13,44 +14,6 @@ const useStyles = makeStyles(() => ({
     width: '100%'
   }
 }));
-
-function splitState(state: ImageDataState, url: string): ImageDataState {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { [url]: deletedUrl, ...stateRest } = state;
-
-  return stateRest;
-}
-
-function imageDataReducer(
-  state: ImageDataState,
-  action: ImageDataActions
-): ImageDataState {
-  const url = action.payload;
-
-  switch (action.type) {
-    case 'REQUEST_FETCHING':
-      return {
-        ...state,
-        [url]: {
-          status: 'loading'
-        }
-      };
-    case 'REQUEST_SUCCESS':
-      return {
-        ...state,
-        [url]: {
-          status: 'isLoaded'
-        }
-      };
-    case 'REQUEST_FAILED':
-      return splitState(state, url);
-    default: {
-      return {
-        ...state
-      };
-    }
-  }
-}
 
 export default function ImageDownloader(): JSX.Element {
   const classes = useStyles();
