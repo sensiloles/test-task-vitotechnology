@@ -7,7 +7,7 @@
 Clone repository.
 
 ```sh
-$ git@github.com:sensiloles/test-task-vitotechnology.git
+$ git clone https://github.com/sensiloles/test-task-vitotechnology.git
 ```
 
 Add your own [GitHub personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) in a .env.development.local file in project folder
