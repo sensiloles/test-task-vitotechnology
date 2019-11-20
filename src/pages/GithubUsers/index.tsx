@@ -153,6 +153,19 @@ export default function GitHubUsers(): JSX.Element {
               payload: 'An error occurred while accessing the server'
             });
           }
+        })
+        .catch(err => {
+          if (err.response.status === 401) {
+            setQuery({
+              type: REQUEST_FAILED,
+              payload: `GitHub authorization error. Check your token in .env.development.local file`
+            });
+          } else {
+            setQuery({
+              type: REQUEST_FAILED,
+              payload: `Request error: ${err.message}`
+            });
+          }
         });
     }
 

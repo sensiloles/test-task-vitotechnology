@@ -22,7 +22,7 @@ export default function NotFoundPage(): JSX.Element {
   return (
     <Container className={classess.page404}>
       <Container className={classess.page404Content}>
-        <Logo404 fill="gray" width="70%" height="70%" />
+        <Logo404 fill="gray" width="20%" height="20%" />
         <Typography variant="h4">ERROR 404</Typography>
         <Typography variant="h6">
           It&apos;s looking like you have a wrong turn.
