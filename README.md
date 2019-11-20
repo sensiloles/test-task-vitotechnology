@@ -34,3 +34,5 @@ $ npm start
 - Implement a token request in the interface or enable github authentication
 - Add the ability to save data in a database or in local storage
 - Improve styles of footer
+- Supplement the displayed GitHub user data
+- Supplement the displayed repository data
