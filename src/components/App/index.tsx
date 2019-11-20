@@ -25,7 +25,7 @@ export default function App(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className={classes.app}>
         <HeaderWithRouter />
         <main className={classes.content}>{routes}</main>

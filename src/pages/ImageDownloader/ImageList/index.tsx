@@ -5,15 +5,10 @@ import ImageItem from './ImageItem';
 const useStyles = makeStyles(() => ({
   imageList: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(3,1fr)',
-    gridTemplateRows: '1fr',
-    gridGap: '5px',
-    marginBottom: '60px',
-    height: '100%'
-  },
-  imageCard: {
-    maxWidth: '100%',
-    maxHeight: '100%'
+    gridTemplateColumns: 'repeat(3,28vw)',
+    gridAutoRows: '28vw',
+    gridGap: '2vw',
+    marginBottom: '60px'
   },
   image: {
     objectFit: 'cover',
@@ -37,8 +32,6 @@ export default function ImageList({ images }: ImageListProps): JSX.Element {
     const { status } = images[image];
 
     return (
-      // TODO: Fix grid squares
-      // <div key={image} className={classes.imageCard}>
       <ImageItem
         key={image}
         className={classes.image}
@@ -47,7 +40,6 @@ export default function ImageList({ images }: ImageListProps): JSX.Element {
         image={image}
         status={status}
       />
-      // </div>
     );
   });
 
